@@ -2,22 +2,22 @@
   "name": "camunda-8-credentials-from-env",
   "version": "1.0.0",
   "description": "Reliably hydrate Camunda 8 Client credentials from the environment",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "jest",
     "build": "tsc --project tsconfig.build.json"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/camunda-community-hub/zeebe-credentials-from-env.git"
+    "url": "git+https://github.com/camunda-community-hub/camunda-8-credentials-from-env.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "josh.wulf@camunda.com",
+  "license": "Apache 2.0",
   "bugs": {
-    "url": "https://github.com/camunda-community-hub/zeebe-credentials-from-env/issues"
+    "url": "https://github.com/camunda-community-hub/camunda-8-credentials-from-env/issues"
   },
-  "homepage": "https://github.com/camunda-community-hub/zeebe-credentials-from-env#readme",
+  "homepage": "https://github.com/camunda-community-hub/camunda-8-credentials-from-env#readme",
   "devDependencies": {
     "@types/jest": "^29.2.2",
     "jest": "^29.3.1",
