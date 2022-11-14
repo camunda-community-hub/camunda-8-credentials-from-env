@@ -23,11 +23,11 @@ import { getCamundaCredentialsFromEnv } from "camunda-8-credentials-from-env"
 
 const creds = getCamundaCredentialsFromEnv()
 if (creds.complete) {
-    // we have a complete credential set
+    // we have a complete credential set:
     // creds.ZEEBE_ADDRESS
     // creds.ZEEBE_CLIENT_ID
     // creds.ZEEBE_CLIENT_SECRET
-    // creds.ZEEBE_AUTHORIZATION_SERVER_URL',
+    // creds.ZEEBE_AUTHORIZATION_SERVER_URL
 } else {
     // missing one or more credential value
 }
