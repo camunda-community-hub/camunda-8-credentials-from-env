@@ -1,4 +1,6 @@
-# Typed Camunda 8 Client Credentials from the Environment for Node.js
+# Camunda 8 Client Credentials from the Environment for Node.js
+
+ [![NPM](https://nodei.co/npm/camunda-8-credentials-from-env.png)](https://npmjs.org/package/camunda-8-credentials-from-env) 
 
 ![Community Extension](https://img.shields.io/badge/Community%20Extension-An%20open%20source%20community%20maintained%20project-FF4700)
 
