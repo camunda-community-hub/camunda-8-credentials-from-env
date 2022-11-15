@@ -32,5 +32,11 @@ function _getEnv() {
         }
     })
     const complete = !!creds.ZEEBE_ADDRESS && !!creds.ZEEBE_CLIENT_ID && !!creds.ZEEBE_CLIENT_SECRET && !!creds.ZEEBE_AUTHORIZATION_SERVER_URL
-    return { ...creds, complete }
+    return complete ? { 
+        ZEEBE_ADDRESS: creds.ZEEBE_ADDRESS as string, 
+        ZEEBE_CLIENT_ID: creds.ZEEBE_CLIENT_ID as string,
+        ZEEBE_CLIENT_SECRET: creds.ZEEBE_CLIENT_SECRET as string,
+        ZEEBE_AUTHORIZATION_SERVER_URL: creds.ZEEBE_AUTHORIZATION_SERVER_URL as string,
+        complete: true as true
+    } : { ...creds, complete: false as false}
 }
