@@ -1,10 +1,18 @@
-import { getCamundaCredentialsFromEnv } from ".."
+import { getCamundaCredentialsFromEnv, getOperateCredentials } from ".."
 
 const keys = [
     'ZEEBE_AUTHORIZATION_SERVER_URL',
     'ZEEBE_CLIENT_SECRET',
     'ZEEBE_CLIENT_ID',
-    'ZEEBE_ADDRESS'
+    'ZEEBE_ADDRESS',
+    'ZEEBE_TOKEN_AUDIENCE',
+    'CAMUNDA_CLUSTER_ID',
+    'CAMUNDA_CLUSTER_REGION',
+    'CAMUNDA_CREDENTIALS_SCOPES',
+    'CAMUNDA_TASKLIST_BASE_URL',
+    'CAMUNDA_OPTIMIZE_BASE_URL',
+    'CAMUNDA_OPERATE_BASE_URL',
+    'CAMUNDA_OAUTH_URL'
 ]
 
 const storage: {[key: string]: string | undefined} = {}
@@ -30,18 +38,28 @@ test('Can read correct env vars', () => {
     process.env.ZEEBE_CLIENT_SECRET = 'secret'
     process.env.ZEEBE_CLIENT_ID = 'clientid'
     process.env.ZEEBE_AUTHORIZATION_SERVER_URL = 'url'
+    process.env.CAMUNDA_OAUTH_URL = 'url'
+    process.env.CAMUNDA_CREDENTIALS_SCOPES = 'Zeebe'
+    process.env.CAMUNDA_CLUSTER_ID = 'cluster_id'
+    process.env.CAMUNDA_CLUSTER_REGION = 'bru-2'
     const creds = getCamundaCredentialsFromEnv(false)
     expect(creds.complete).toBe(true)
     expect(creds.ZEEBE_ADDRESS).toBe('address')
     expect(creds.ZEEBE_AUTHORIZATION_SERVER_URL).toBe('url')
     expect(creds.ZEEBE_CLIENT_SECRET).toBe('secret')
     expect(creds.ZEEBE_CLIENT_ID).toBe('clientid')
+    expect(creds.scopes.Zeebe).toBeTruthy()
+    expect(creds.scopes.Operate).toBeFalsy()
 })
 
-test('Returns undefined for a variable that is not defined', () => {
-    const creds = getCamundaCredentialsFromEnv(false)
-    expect(creds.ZEEBE_ADDRESS).toBe(undefined)
-    expect(creds.complete).toBe(false)
+test('Throws if a required variable is not defined', () => {
+    let thrown = false
+    try {
+        getCamundaCredentialsFromEnv(false)
+    } catch {
+        thrown = true
+    }
+    expect(thrown).toBe(true)
 })
 
 

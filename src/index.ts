@@ -1,6 +1,14 @@
 import { createEnv } from 'neon-env'
+import { _getOperateEnv } from './lib/operate'
+import { _getOptimizeEnv } from './lib/optimize'
+import { _getTasklistEnv } from './lib/tasklist'
+import { _getZeebeEnv } from './lib/zeebe'
 
 let credentialsCache: ReturnType<typeof _getEnv>
+let optimizeCache: ReturnType<typeof _getOptimizeEnv>
+let operateCache: ReturnType<typeof _getOperateEnv>
+let tasklistCache: ReturnType<typeof _getTasklistEnv>
+let zeebeCache: ReturnType<typeof _getZeebeEnv>
 
 export function getCamundaCredentialsFromEnv(cache = true) {
     if (!cache) {
@@ -12,31 +20,99 @@ export function getCamundaCredentialsFromEnv(cache = true) {
     return credentialsCache
 } 
 
+export function getZeebeCredentials() {
+    if (zeebeCache === undefined) {
+        zeebeCache = _getZeebeEnv()
+    }
+    return zeebeCache
+}
+
+export function getTasklistCredentials() {
+    if (tasklistCache === undefined) {
+        tasklistCache = _getTasklistEnv()
+    }
+    return tasklistCache
+}
+
+export function getOperateCredentials() {
+    if (operateCache === undefined) {
+        operateCache = _getOperateEnv()
+    }
+    return operateCache
+}
+
+export function getOptimizeCredentials() {
+    if (optimizeCache === undefined) {
+        optimizeCache = _getOptimizeEnv()
+    } 
+    return optimizeCache
+}
+
 function _getEnv() {
     const creds = createEnv({
         ZEEBE_ADDRESS: {
             type: 'string',
-            optional: true
+            optional: false
         },
         ZEEBE_CLIENT_ID: {
             type: 'string',
-            optional: true
+            optional: false
         },
         ZEEBE_CLIENT_SECRET: {
             type: 'string',
-            optional: true
+            optional: false
         },
         ZEEBE_AUTHORIZATION_SERVER_URL: {
             type: 'string',
+            optional: false
+        },
+        ZEEBE_TOKEN_AUDIENCE: {
+            type: 'string',
             optional: true
+        },
+        CAMUNDA_CLUSTER_ID: {
+            type: 'string',
+            optional: false            
+        },
+        CAMUNDA_CLUSTER_REGION: {
+            type: 'string',
+            optional: false   
+        },
+        CAMUNDA_CREDENTIALS_SCOPES: {
+            type: 'string',
+            optional: false
+        },
+        CAMUNDA_TASKLIST_BASE_URL: {
+            type: 'string',
+            optional: true            
+        },
+        CAMUNDA_OPTIMIZE_BASE_URL: {
+            type: 'string',
+            optional: true            
+        },
+        CAMUNDA_OPERATE_BASE_URL: {
+            type: 'string',
+            optional: true            
+        },
+        CAMUNDA_OAUTH_URL: {
+            type: 'string',
+            optional: false            
         }
     })
-    const complete = !!creds.ZEEBE_ADDRESS && !!creds.ZEEBE_CLIENT_ID && !!creds.ZEEBE_CLIENT_SECRET && !!creds.ZEEBE_AUTHORIZATION_SERVER_URL
-    return complete ? { 
+    const scopes = {
+        Zeebe: creds.CAMUNDA_CREDENTIALS_SCOPES?.includes('Zeebe'),
+        Tasklist: creds.CAMUNDA_CREDENTIALS_SCOPES?.includes('Tasklist'),
+        Operate: creds.CAMUNDA_CREDENTIALS_SCOPES?.includes('Operate'),
+        Optimize: creds.CAMUNDA_CREDENTIALS_SCOPES?.includes('Optimize')
+    }
+    return { 
+        ...creds,
         ZEEBE_ADDRESS: creds.ZEEBE_ADDRESS as string, 
         ZEEBE_CLIENT_ID: creds.ZEEBE_CLIENT_ID as string,
         ZEEBE_CLIENT_SECRET: creds.ZEEBE_CLIENT_SECRET as string,
         ZEEBE_AUTHORIZATION_SERVER_URL: creds.ZEEBE_AUTHORIZATION_SERVER_URL as string,
+        scopes,
         complete: true as true
-    } : { ...creds, complete: false as false}
+    } 
 }
+

@@ -21,19 +21,11 @@ To use:
 ```typescript
 import { getCamundaCredentialsFromEnv } from "camunda-8-credentials-from-env"
 
-const creds = getCamundaCredentialsFromEnv()
-if (creds.complete) {
-    // we have a complete credential set:
-    // creds.ZEEBE_ADDRESS
-    // creds.ZEEBE_CLIENT_ID
-    // creds.ZEEBE_CLIENT_SECRET
-    // creds.ZEEBE_AUTHORIZATION_SERVER_URL
-} else {
-    // missing one or more credential value
-}
+// throws if required credential elements are not found in the environment
+// get credentials for the Operate API
+const creds = getOperateCredentials()
 ```
 
-The library will only hit the environment once. Further calls to `getCamundaCredentialsFromEnv()` will return a cached set of values. 
+The library will only hit the environment once. Further calls to the same method will return a cached set of values. 
 
-In the unlikely event that you want to check if the environment has changed, pass in `false` to the call: `getCamundaCredentialsFromEnv(false)`. 
 
