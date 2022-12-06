@@ -62,4 +62,24 @@ test('Throws if a required variable is not defined', () => {
     expect(thrown).toBe(true)
 })
 
+test('Throws if a required scope is not found', () => {
+    let thrown = false
+    expect(process.env.ZEEBE_ADDRESS).toBe(undefined)
+    process.env.ZEEBE_ADDRESS = 'address'
+    process.env.ZEEBE_CLIENT_SECRET = 'secret'
+    process.env.ZEEBE_CLIENT_ID = 'clientid'
+    process.env.ZEEBE_AUTHORIZATION_SERVER_URL = 'url'
+    process.env.ZEEBE_TOKEN_AUDIENCE = 'sntshnt'
+    process.env.CAMUNDA_OAUTH_URL = 'url'
+    process.env.CAMUNDA_CREDENTIALS_SCOPES = 'Zeebe'
+    process.env.CAMUNDA_CLUSTER_ID = 'cluster_id'
+    process.env.CAMUNDA_CLUSTER_REGION = 'bru-2'
+    process.env.CAMUNDA_OPERATE_BASE_URL = 'url'
+    try {
+        getOperateCredentials()
+    } catch (e) {
+        thrown = true
+    }
+    expect(thrown).toBe(true)
+})
 

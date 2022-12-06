@@ -24,12 +24,18 @@ export function getZeebeCredentials() {
     if (zeebeCache === undefined) {
         zeebeCache = _getZeebeEnv()
     }
+    if (!zeebeCache.CAMUNDA_CREDENTIALS_SCOPES?.includes('Zeebe')) {
+        throw new Error(`Credentials do not have required scope 'Zeebe'. Credential scopes: '${zeebeCache.CAMUNDA_CREDENTIALS_SCOPES}'`)
+    }
     return zeebeCache
 }
 
 export function getTasklistCredentials() {
     if (tasklistCache === undefined) {
         tasklistCache = _getTasklistEnv()
+    }
+    if (!tasklistCache.CAMUNDA_CREDENTIALS_SCOPES?.includes('Tasklist')) {
+        throw new Error(`Credentials do not have required scope 'Tasklist'. Credential scopes: '${tasklistCache.CAMUNDA_CREDENTIALS_SCOPES}'`)
     }
     return tasklistCache
 }
@@ -38,6 +44,9 @@ export function getOperateCredentials() {
     if (operateCache === undefined) {
         operateCache = _getOperateEnv()
     }
+    if (!operateCache.CAMUNDA_CREDENTIALS_SCOPES?.includes('Operate')) {
+        throw new Error(`Credentials do not have required scope 'Operate'. Credential scopes: '${operateCache.CAMUNDA_CREDENTIALS_SCOPES}'`)
+    }
     return operateCache
 }
 
@@ -45,6 +54,9 @@ export function getOptimizeCredentials() {
     if (optimizeCache === undefined) {
         optimizeCache = _getOptimizeEnv()
     } 
+    if (!optimizeCache.CAMUNDA_CREDENTIALS_SCOPES?.includes('Optimize')) {
+        throw new Error(`Credentials do not have required scope 'Optimize'. Credential scopes: '${optimizeCache.CAMUNDA_CREDENTIALS_SCOPES}'`)
+    }
     return optimizeCache
 }
 
