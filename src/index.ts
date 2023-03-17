@@ -1,4 +1,5 @@
 import { createEnv } from 'neon-env'
+import { _getConsoleEnv } from './lib/console'
 import { _getOperateEnv } from './lib/operate'
 import { _getOptimizeEnv } from './lib/optimize'
 import { _getTasklistEnv } from './lib/tasklist'
@@ -9,6 +10,7 @@ let optimizeCache: ReturnType<typeof _getOptimizeEnv>
 let operateCache: ReturnType<typeof _getOperateEnv>
 let tasklistCache: ReturnType<typeof _getTasklistEnv>
 let zeebeCache: ReturnType<typeof _getZeebeEnv>
+let consoleCache: ReturnType<typeof _getConsoleEnv>
 
 export function getCamundaCredentialsFromEnv(cache = true) {
     if (!cache) {
@@ -19,6 +21,13 @@ export function getCamundaCredentialsFromEnv(cache = true) {
     }
     return credentialsCache
 } 
+
+export function getConsoleCredentials() {
+    if (consoleCache === undefined) {
+        consoleCache = _getConsoleEnv()
+    }
+    return consoleCache
+}
 
 export function getZeebeCredentials() {
     if (zeebeCache === undefined) {

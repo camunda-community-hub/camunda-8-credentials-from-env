@@ -26,6 +26,7 @@ const operateCreds = c.getOperateCredentials()
 const optimizeCreds = c.getOptimiseCredentials()
 const tasklistCreds = c.getTasklistCredentials()
 const zeebeCreds = c.getZeebeCredentials()
+const consoleCreds = c.getConsoleCredentials()
 ```
 
 The library will only hit the environment once. Further calls to the same method will return a cached set of values. 
