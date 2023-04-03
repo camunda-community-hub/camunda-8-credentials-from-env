@@ -1,6 +1,6 @@
 {
   "name": "camunda-8-credentials-from-env",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Reliably hydrate Camunda 8 Client credentials from the environment",
   "main": "dist/index.js",
   "scripts": {
