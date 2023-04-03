@@ -17,11 +17,16 @@ export function _getConsoleEnv() {
         CAMUNDA_OAUTH_URL: {
             type: 'string',
             optional: false            
+        },
+        CAMUNDA_OAUTH_TOKEN_AUDIENCE: {
+            type: 'string',
+            optional: false
         }
     }) as {
         CAMUNDA_CONSOLE_CLIENT_ID: string,
         CAMUNDA_CONSOLE_CLIENT_SECRET: string,
         CAMUNDA_CONSOLE_BASE_URL: string,
-        CAMUNDA_OAUTH_URL: string
+        CAMUNDA_OAUTH_URL: string,
+        CAMUNDA_OAUTH_TOKEN_AUDIENCE: string
     }
 }
