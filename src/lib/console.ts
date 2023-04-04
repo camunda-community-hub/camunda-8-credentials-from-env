@@ -18,7 +18,7 @@ export function _getConsoleEnv() {
             type: 'string',
             optional: false            
         },
-        CAMUNDA_OAUTH_TOKEN_AUDIENCE: {
+        CAMUNDA_CONSOLE_OAUTH_AUDIENCE: {
             type: 'string',
             optional: false
         }
@@ -27,6 +27,6 @@ export function _getConsoleEnv() {
         CAMUNDA_CONSOLE_CLIENT_SECRET: string,
         CAMUNDA_CONSOLE_BASE_URL: string,
         CAMUNDA_OAUTH_URL: string,
-        CAMUNDA_OAUTH_TOKEN_AUDIENCE: string
+        CAMUNDA_CONSOLE_OAUTH_AUDIENCE: string
     }
 }
