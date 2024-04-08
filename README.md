@@ -8,6 +8,11 @@
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
+# DEPRECATED
+
+This package is deprecated. Please use the official SDK package @camunda8/sdk. See: https://github.com/camunda/camunda-8-js-sdk
+---
+
 Deterministically extract [Camunda 8 Client credentials](https://docs.camunda.io/docs/guides/setup-client-connection-credentials/#set-up-client-connection-credentials) from the environment in Node.js. Uses [neon-env](https://www.npmjs.com/package/neon-env) under the hood.
 
 To install in your project:
